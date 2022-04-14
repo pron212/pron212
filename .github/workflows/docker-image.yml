@@ -14,11 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+    - name: Build and Run the Docker image
       run: 
-       docker build . --file Dockerfile --tag flower:$(date +%s)
+       docker build . --file Dockerfile --tag flower
        docker run --network container:flower 
-       docker run --network container:flower 
+
       
       
       
