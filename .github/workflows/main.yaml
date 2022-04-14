@@ -1,11 +1,15 @@
 name: main
-on: push
+on: 
+ push:
+   branches:
+     - main
+  
 jobs:
-  test:
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
       - name: main
-        run: docker run --network container:flower appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5555/
+        run: docker run --network container:flower 
