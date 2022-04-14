@@ -1,10 +1,81 @@
-version: '3'
+
+version: '3.8'
+
 services:
+
   web:
-    container_name: webapp-frontend
     build: .
+    image: web
+    container_name: web
     ports:
-      - "5000:5000"
-  redis:
-    container_name: redis-backend
-    image: "redis:alpine"
+      - 5004:5000
+    command: python manage.py run -h 0.0.0.0()
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - FLASK_DEBUG=1
+      - APP_SETTINGS=project.server.config.DevelopmentConfig
+      - CELERY_BROKER_URL= "amqp://supreeth:supreeth_123@rabbitmq.sirpi.co.in:5672/localhost1"
+      - CELERY_RESULT_BACKEND="mongodb+srv://supreeth:supreeth_123@sirpi.uv5ut.mongodb.net/sirpi?retryWrites=true&w=majority"
+    depends_on:
+      - web
+      - worker1
+      - worker2
+      - flower1
+      - flower2
+
+  worker:
+    build: .
+    command: celery --app project.server.tasks.celery worker --loglevel=info
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - FLASK_DEBUG=1
+      - APP_SETTINGS=project.server.config.DevelopmentConfig
+      - CELERY_BROKER_URL="amqp://supreeth:supreeth_123@rabbitmq.sirpi.co.in:5672/localhost1"
+      - CELERY_RESULT_BACKEND="mongodb+srv://supreeth:supreeth_123@sirpi.uv5ut.mongodb.net/sirpi?retryWrites=true&w=majority"
+    depends_on:
+      - web
+      - worker1
+      - worker2
+      - flower1
+      - flower2
+
+  mongo:
+
+    image: mongo
+ 
+  worker:
+    build: .
+    command: celery --app project.server.tasks.celery worker --loglevel=info --logfile=project/logs/celery.log
+    volumes:
+     - .:/usr/src/app
+    environment:
+     - FLASK_DEBUG=1
+     - APP_SETTINGS=project.server.config.DevelopmentConfig
+     - CELERY_BROKER_URL="amqp://supreeth:supreeth_123@rabbitmq.sirpi.co.in:5672/localhost1"
+     - CELERY_RESULT_BACKEND="mongodb+srv://supreeth:supreeth_123@sirpi.uv5ut.mongodb.net/sirpi?retryWrites=true&w=majority"
+    depends_on:
+      - web
+      - worker1
+      - worker2
+      - flower1
+      - flower2
+
+  dashboard:
+    conatiner_name: flower
+    build: .
+    command: celery --app project.server.tasks.celery flower --port=5555 --broker="amqp://supreeth:supreeth_123@rabbitmq.sirpi.co.in:5672/localhost1"
+    ports:
+     - 5555:5555
+    environment:
+      - FLASK_DEBUG=1
+      - APP_SETTINGS=project.server.config.DevelopmentConfig
+      - CELERY_BROKER_URL="amqp://supreeth:supreeth_123@rabbitmq.sirpi.co.in:5672/localhost1"
+      - CELERY_RESULT_BACKEND="mongodb+srv://supreeth:supreeth_123@sirpi.uv5ut.mongodb.net/sirpi?retryWrites=true&w=majority"
+    depends_on:
+      - web
+      - worker1
+      - worker2
+      - flower1
+      - flower2
