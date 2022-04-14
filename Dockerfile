@@ -1,9 +1,13 @@
-FROM python:3.7-alpine
-WORKDIR /code
-ENV FLASK_APP app.py
-ENV FLASK_RUN_HOST 0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["flask", "run"]
+FROM ubuntu
+
+# update the package repository and install python pip
+RUN apt-get -y update && apt-get -y install python-dev python-pip
+
+# installing flower
+RUN pip install flower
+
+# Make sure we expose port 5555 so that we can connect to it
+EXPOSE 5555
+
+# Running flower
+ENTRYPOINT ["flower", "--port=5555"]
