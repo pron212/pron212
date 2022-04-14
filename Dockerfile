@@ -1,7 +1,7 @@
 FROM ubuntu
 
 # update the package repository and install python pip
-RUN apt-get -y update && apt-get -y install python-dev python-pip
+RUN apt-get -y update && apt-get -y install python3-dev python3-pip
 
 # installing flower
 RUN pip install flower
