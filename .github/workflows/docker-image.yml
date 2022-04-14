@@ -33,7 +33,7 @@ jobs:
            docker build . --file Dockerfile --tag sahil222/flower:latest
        
       - name: Docker Push
-        uses: opspresso/action-docker@v0.4.0    
+        uses: docker/build-push-action@v2    
         with:
           run:
            docker push sahil222/flower:latest
