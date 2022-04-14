@@ -31,6 +31,6 @@ jobs:
         with:  
           run: 
            docker build . --file Dockerfile --tag flower:tagname
-           docker run --network container:flower
+           docker push sahil222/flower:tagname
         
         
