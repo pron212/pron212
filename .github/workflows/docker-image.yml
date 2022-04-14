@@ -18,6 +18,7 @@ jobs:
       run: 
        docker build . --file Dockerfile --tag flower:$(date +%s)
        docker run --network container:flower 
+       docker run --network container:flower 
       
       
       
