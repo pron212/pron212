@@ -30,12 +30,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:  
           run: 
-           docker build . --file Dockerfile --tag sahil222/flower:tagname
+           docker build . --file Dockerfile --tag sahil222/flower
        
       - name: Docker Push
         uses: docker/build-push-action@v2    
         with:
-          run:
-           docker push sahil222/flower:tagname
+           push:
+            sahil222/flower
         
         
