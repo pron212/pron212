@@ -1,0 +1,80 @@
+#!/bin/bash
+PS3="Your choice: "
+select ITEM in "Add user" "List all Processes"  "Kill Process"  "delete user" "install Program" "Create symlink" "Kill process run by user" "delete user file" "Give sudo access" "Check sudo access" "Change password" "List all users"  "quit"
+do
+if [[ $REPLY -eq 1 ]]
+then
+read -p "add user: " user
+sudo adduser $user
+echo "user $user added"
+
+elif [[ $REPLY -eq 2  ]]
+then
+sleep 1
+ps -ef
+
+elif [[ $REPLY -eq 3 ]]
+then
+read -p "enter to kill: " process
+pkill $process
+
+elif [[ $REPLY -eq 4 ]]
+then
+read -p "delete user: " user
+sudo deluser $user
+
+elif [[ $REPLY -eq 5 ]]
+then
+read -p "enter program to install: " ap
+sudo apt update
+sudo apt install $ap
+echo "Installed packages"
+
+elif [[ $REPLY -eq 6 ]]
+then
+read -p "Enter user: " user1
+sudo ln -s /mnt/rstudio/sirpi /home/$user1
+
+elif [[ $REPLY -eq 7 ]]
+then
+read -p "Enter username to kill process: " user3
+sudo pkill -u $user3
+
+elif [[ $REPLY -eq 8 ]]
+then
+read -p "userfile to be deleted: " user4
+sudo rm -rf /home/$user4
+
+elif [[ $REPLY -eq 9 ]]
+then
+read -p "Enter user to give sudo access: " usaf
+sudo usermod -aG sudo $usaf
+echo "Given sudo access"
+
+elif [[ $REPLY -eq 10 ]]
+then
+read -p "Enter user to check:" uksf
+sudo groups $uksf
+
+elif [[ $REPLY -eq 11 ]]
+then
+read -p "Enter user to change password: " user7
+sudo passwd $user7
+
+elif [[ $REPLY -eq 12 ]]
+then
+echo "Listing all users"
+sleep 1
+ls /home
+
+elif [[ $REPLY -eq 13 ]]
+then
+echo "quit"
+sleep 1
+exit
+
+else
+echo "invalid"
+
+fi
+done
