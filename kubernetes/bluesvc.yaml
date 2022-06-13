@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blueapp1
+  labels:
+    run: blueapp1
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    run: blueapp1
