@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greenapp1
+  labels:
+    app: greenapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: greenapp
+  template:
+    metadata:
+      labels:
+        app: greenapp
+    spec:
+      containers:
+      - name: greenapp
+        image: hashicorp/http-echo
+        ports:
+        - containerPort: 8081
