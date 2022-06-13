@@ -17,5 +17,6 @@ spec:
       containers:
       - name: greenapp
         image: hashicorp/http-echo
+        args: ["I am Green"]
         ports:
         - containerPort: 8081
