@@ -1,16 +1,22 @@
-### Hi there 👋
+# Passport Management And Monitoring System
 
-<!--
-**pron212/pron212** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+> ## Follow these steps to host the application locally on your machine:
+1.  Open terminal or command line in your machine.
+2.  Set the current directory to the project directory.
+3.  Now, type `npm install` in command line to install all the dependencies required to run the application.
+4.  Once the dependencies get installed, open the project in your IDE (VSCode, Atom, Sublime etc.)
+5.  Now, type the command `npm start` in the terminal and press `Enter`.
+6.  Wait for some time till the application launches successfully. After that application will automatically open in the web browser.
+7.  If application doesn't run automatically, type this link in your web browser `http://localhost:3000/`.
 
-Here are some ideas to get you started:
+> ## Contributing guidelines
+### To push new changes, follow these steps:
+1. Type `git add .` to add all the files. Press `Enter`.
+2. Type `git commit -m <message in quotes>`. Press `Enter`.
+3. Now, type `git pull` and press `Enter`.
+4. If any conflicts are there, resolve those conflicts.
+5. Finally, type `git push` and press `Enter`.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+    Your code will be successfully pushed to the application repository.
+
+**Live demo**: https://houseofpassports.netlify.app/
